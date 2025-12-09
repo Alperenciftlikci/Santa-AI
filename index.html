@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Santai - AI Photo & Video Generator</title>
     <meta name="description" content="Transform your photos and videos with AI magic. Create stunning artwork with Santai.">
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="app-icon.png">
+    <link rel="apple-touch-icon" href="app-icon.png">
     <style>
         * {
             margin: 0;
@@ -15,178 +16,560 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #1a0a2e 100%);
+            background: linear-gradient(135deg, #0a0014 0%, #1a0a2e 25%, #2d1b4e 50%, #1a0a2e 75%, #0a0014 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             color: #fff;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 25s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 20s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 28s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 1s; animation-duration: 22s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 3s; animation-duration: 24s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 26s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 2s; animation-duration: 21s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 4s; animation-duration: 23s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 1s; animation-duration: 27s; }
+        .particle:nth-child(10) { left: 15%; animation-delay: 3s; animation-duration: 19s; }
+        .particle:nth-child(11) { left: 25%; animation-delay: 0s; animation-duration: 30s; }
+        .particle:nth-child(12) { left: 75%; animation-delay: 2s; animation-duration: 18s; }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Glow orbs */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-orb-1 {
+            width: 400px;
+            height: 400px;
+            background: #ffd700;
+            top: -100px;
+            right: -100px;
+            animation: orbFloat1 8s ease-in-out infinite;
+        }
+
+        .glow-orb-2 {
+            width: 300px;
+            height: 300px;
+            background: #ff6b6b;
+            bottom: -50px;
+            left: -50px;
+            animation: orbFloat2 10s ease-in-out infinite;
+        }
+
+        .glow-orb-3 {
+            width: 250px;
+            height: 250px;
+            background: #4ecdc4;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: orbFloat3 12s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, 30px) scale(1.1); }
+        }
+
+        @keyframes orbFloat2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.15); }
+        }
+
+        @keyframes orbFloat3 {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.35; }
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 40px 20px;
+            position: relative;
+            z-index: 1;
         }
 
         header {
             text-align: center;
-            padding: 60px 0;
+            padding: 80px 0 60px;
         }
 
-        .logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 28px;
-            margin-bottom: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ffd700, #ffec8b, #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 16px;
-        }
-
-        .tagline {
-            font-size: 1.25rem;
-            color: rgba(255, 255, 255, 0.8);
+        .logo-container {
+            position: relative;
+            display: inline-block;
             margin-bottom: 32px;
         }
 
+        .logo {
+            width: 140px;
+            height: 140px;
+            border-radius: 32px;
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(255, 215, 0, 0.3);
+            animation: logoFloat 4s ease-in-out infinite, logoGlow 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.5); }
+        }
+
+        .logo-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 180px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            animation: ringPulse 3s ease-in-out infinite;
+        }
+
+        .logo-ring-2 {
+            animation-delay: 1s;
+            width: 210px;
+            height: 210px;
+            border-color: rgba(255, 215, 0, 0.15);
+        }
+
+        @keyframes ringPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.2; }
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd700 0%, #ffec8b 25%, #fff 50%, #ffec8b 75%, #ffd700 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: shimmer 3s linear infinite;
+            letter-spacing: -1px;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .tagline {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 40px;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .app-store-container {
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
         .app-store-badge {
-            height: 54px;
-            transition: transform 0.3s ease;
+            height: 60px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
         }
 
         .app-store-badge:hover {
-            transform: scale(1.05);
+            transform: scale(1.08) translateY(-3px);
+            filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.4));
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-top: 80px;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 215, 0, 0.3);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 215, 0, 0.1);
+        }
+
+        .feature:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            display: block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .feature:nth-child(1) .feature-icon { animation-delay: 0s; }
+        .feature:nth-child(2) .feature-icon { animation-delay: 0.2s; }
+        .feature:nth-child(3) .feature-icon { animation-delay: 0.4s; }
+        .feature:nth-child(4) .feature-icon { animation-delay: 0.6s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .feature h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        .feature p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
         }
 
         .links {
             display: flex;
             justify-content: center;
-            gap: 32px;
-            margin-top: 60px;
+            gap: 20px;
+            margin-top: 80px;
             flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.9s both;
         }
 
         .links a {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             font-size: 1rem;
-            padding: 12px 24px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
+            padding: 14px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.5s ease;
         }
 
         .links a:hover {
             color: #ffd700;
-            border-color: #ffd700;
-            background: rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.5);
+            background: rgba(255, 215, 0, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.15);
         }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 24px;
+        .links a:hover::before {
+            left: 100%;
+        }
+
+        /* Stats section */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
             margin-top: 60px;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
         }
 
-        .feature {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 24px;
+        .stat {
             text-align: center;
         }
 
-        .feature-icon {
+        .stat-number {
             font-size: 2.5rem;
-            margin-bottom: 12px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd700, #ffec8b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
         }
 
-        .feature h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: #ffd700;
-        }
-
-        .feature p {
+        .stat-label {
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 4px;
         }
 
         footer {
             text-align: center;
-            padding: 40px 0;
-            margin-top: 60px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 60px 0 40px;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            animation: fadeInUp 1s ease-out 1.1s both;
         }
 
         footer p {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
         }
 
         footer a {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         footer a:hover {
             color: #ffd700;
         }
 
-        @media (max-width: 600px) {
+        .footer-links {
+            margin-top: 16px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
             h1 {
-                font-size: 2rem;
+                font-size: 2.8rem;
             }
 
             .tagline {
-                font-size: 1rem;
+                font-size: 1.1rem;
+            }
+
+            .logo {
+                width: 110px;
+                height: 110px;
+            }
+
+            .logo-ring {
+                width: 150px;
+                height: 150px;
+            }
+
+            .logo-ring-2 {
+                width: 180px;
+                height: 180px;
+            }
+
+            .stats {
+                gap: 40px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            header {
+                padding: 60px 0 40px;
+            }
+
+            .features {
+                margin-top: 60px;
             }
 
             .links {
                 flex-direction: column;
                 align-items: center;
+                gap: 12px;
+            }
+
+            .links a {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .feature {
+                padding: 24px 20px;
+            }
+
+            .glow-orb {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Floating particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Glow orbs -->
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+
     <div class="container">
         <header>
-            <img src="app-icon.png" alt="Santai App Icon" class="logo">
+            <div class="logo-container">
+                <div class="logo-ring"></div>
+                <div class="logo-ring logo-ring-2"></div>
+                <img src="app-icon.png" alt="Santai App Icon" class="logo">
+            </div>
             <h1>Santai</h1>
             <p class="tagline">Transform your photos & videos with AI magic</p>
-            <a href="https://apps.apple.com/app/santai" target="_blank">
-                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" class="app-store-badge">
-            </a>
+
+            <div class="app-store-container">
+                <a href="https://apps.apple.com/app/santai" target="_blank">
+                    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" class="app-store-badge">
+                </a>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">AI Styles</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">4K</span>
+                    <span class="stat-label">Quality Output</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">Fast</span>
+                    <span class="stat-label">Generation</span>
+                </div>
+            </div>
         </header>
 
         <div class="features">
             <div class="feature">
-                <div class="feature-icon">🎨</div>
+                <span class="feature-icon">🎨</span>
                 <h3>AI Photo Generation</h3>
-                <p>Create stunning artwork from your photos with advanced AI models</p>
+                <p>Create stunning artwork from your photos with advanced AI models like Flux and more</p>
             </div>
             <div class="feature">
-                <div class="feature-icon">🎬</div>
+                <span class="feature-icon">🎬</span>
                 <h3>AI Video Creation</h3>
-                <p>Transform images into magical animated videos</p>
+                <p>Transform images into magical animated videos with Sora, Veo 3.1 & Kling 2.6</p>
             </div>
             <div class="feature">
-                <div class="feature-icon">✨</div>
-                <h3>100+ Styles</h3>
-                <p>Choose from over 100 unique artistic styles and effects</p>
+                <span class="feature-icon">✨</span>
+                <h3>100+ Unique Styles</h3>
+                <p>From Studio Ghibli to Cyberpunk, explore endless creative possibilities</p>
             </div>
             <div class="feature">
-                <div class="feature-icon">🚀</div>
-                <h3>Fast & Easy</h3>
-                <p>Get amazing results in seconds with our intuitive interface</p>
+                <span class="feature-icon">🔒</span>
+                <h3>Privacy First</h3>
+                <p>Your photos are automatically deleted within 1 hour. We never sell your data</p>
             </div>
         </div>
 
@@ -198,10 +581,71 @@
 
         <footer>
             <p>&copy; 2025 Santai. All rights reserved.</p>
-            <p style="margin-top: 8px;">
+            <div class="footer-links">
                 <a href="mailto:support@santai.app">support@santai.app</a>
-            </p>
+            </div>
         </footer>
     </div>
+
+    <script>
+        // Add more dynamic particles on mouse move
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.95) {
+                createSparkle(e.clientX, e.clientY);
+            }
+        });
+
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.style.cssText = `
+                position: fixed;
+                left: ${x}px;
+                top: ${y}px;
+                width: 4px;
+                height: 4px;
+                background: radial-gradient(circle, rgba(255, 215, 0, 1) 0%, transparent 70%);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 1000;
+                animation: sparkle 1s ease-out forwards;
+            `;
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => sparkle.remove(), 1000);
+        }
+
+        // Add sparkle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkle {
+                0% {
+                    transform: scale(1) translate(0, 0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(0) translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
