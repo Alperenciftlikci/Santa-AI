@@ -88,6 +88,13 @@
             margin-bottom: 12px;
         }
 
+        h4 {
+            font-size: 1rem;
+            color: #ffd700;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
         p {
             color: rgba(255, 255, 255, 0.85);
             margin-bottom: 16px;
@@ -117,6 +124,22 @@
 
         .highlight-box p {
             margin-bottom: 0;
+        }
+
+        .warning-box {
+            background: rgba(255, 100, 100, 0.1);
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .info-box {
+            background: rgba(100, 150, 255, 0.1);
+            border: 1px solid rgba(100, 150, 255, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
         }
 
         .data-table {
@@ -163,6 +186,33 @@
             font-size: 0.875rem;
         }
 
+        .retention-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .retention-table th,
+        .retention-table td {
+            padding: 14px 16px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .retention-table th {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        .retention-table td {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .retention-table tr:nth-child(even) td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
         @media (max-width: 600px) {
             h1 {
                 font-size: 1.75rem;
@@ -174,6 +224,17 @@
 
             h2 {
                 font-size: 1.25rem;
+            }
+
+            .data-table, .retention-table {
+                font-size: 0.85rem;
+            }
+
+            .data-table th,
+            .data-table td,
+            .retention-table th,
+            .retention-table td {
+                padding: 10px 12px;
             }
         }
     </style>
@@ -193,31 +254,68 @@
             <p>By downloading, accessing, or using the App, you agree to the collection and use of information in accordance with this Privacy Policy. If you do not agree with the terms of this Privacy Policy, please do not access or use the App.</p>
 
             <div class="highlight-box">
-                <p><strong>Key Point:</strong> We prioritize your privacy. Your photos are processed securely, and we do not sell your personal data to third parties.</p>
+                <p><strong>Key Privacy Commitments:</strong></p>
+                <ul style="margin-top: 12px; margin-bottom: 0;">
+                    <li>Your uploaded photos are automatically deleted from AI processing servers within 1 hour</li>
+                    <li>We do NOT sell your personal data to third parties</li>
+                    <li>We do NOT use your photos to train AI models</li>
+                    <li>You have full control over your data and can delete it at any time</li>
+                </ul>
             </div>
 
             <h2>2. Information We Collect</h2>
 
             <h3>2.1 Information You Provide Directly</h3>
+
+            <h4>Account Information</h4>
+            <p>When you create an account, we collect:</p>
             <ul>
-                <li><strong>Photos and Images:</strong> When you use our AI generation features, you upload photos that are processed by our AI services. These images are temporarily processed to generate your requested content.</li>
-                <li><strong>Account Information:</strong> If you create an account, we collect your email address and authentication credentials through Firebase Authentication (including Sign in with Apple and Google Sign-In).</li>
-                <li><strong>User-Generated Content:</strong> Text prompts, style preferences, and other inputs you provide when creating AI-generated content.</li>
-                <li><strong>Community Submissions:</strong> If you choose to share your creations to our community gallery, the images and associated metadata you submit.</li>
+                <li><strong>Email Address:</strong> Used for account identification and communication</li>
+                <li><strong>Display Name:</strong> Optional, used for personalization</li>
+                <li><strong>Authentication Credentials:</strong> Securely managed through Firebase Authentication</li>
+                <li><strong>Sign-in Method:</strong> Apple ID or Google Sign-In (we receive only the information you authorize)</li>
+            </ul>
+
+            <h4>Photos and Media</h4>
+            <ul>
+                <li><strong>Uploaded Photos:</strong> Images you upload for AI generation are temporarily processed and automatically deleted from processing servers within 1 hour</li>
+                <li><strong>Generated Content:</strong> AI-generated images and videos are stored locally on your device</li>
+                <li><strong>Community Submissions:</strong> If you voluntarily share content to our community gallery, those images are stored on our servers (Cloudflare R2) until you delete them</li>
+            </ul>
+
+            <h4>User Input</h4>
+            <ul>
+                <li><strong>Text Prompts:</strong> Descriptions you provide for AI generation</li>
+                <li><strong>Style Preferences:</strong> Selected styles, categories, and generation settings</li>
+                <li><strong>Referral Codes:</strong> If you use or share referral codes</li>
             </ul>
 
             <h3>2.2 Information Collected Automatically</h3>
+
+            <h4>Device Information</h4>
             <ul>
-                <li><strong>Device Information:</strong> Device type, operating system version, unique device identifiers, and mobile network information.</li>
-                <li><strong>Usage Data:</strong> Information about how you use the App, including features accessed, generation history, and interaction patterns.</li>
-                <li><strong>Analytics Data:</strong> We use Firebase Analytics to collect anonymized usage statistics to improve our App.</li>
-                <li><strong>Crash Reports:</strong> If the App crashes, we may collect diagnostic information to help us fix issues and improve stability.</li>
+                <li>Device type and model</li>
+                <li>Operating system version</li>
+                <li>Unique device identifiers (for authentication and fraud prevention)</li>
+                <li>App version</li>
             </ul>
+
+            <h4>Usage Data</h4>
+            <ul>
+                <li>Features accessed and generation history</li>
+                <li>Category selections and style preferences</li>
+                <li>Session duration and interaction patterns</li>
+                <li>Error logs and crash reports (anonymized)</li>
+            </ul>
+
+            <h4>Analytics Data</h4>
+            <p>We use Firebase Analytics to collect anonymized usage statistics to improve the App. You can opt out of analytics in App settings.</p>
 
             <h3>2.3 Information from Third-Party Services</h3>
             <ul>
-                <li><strong>Authentication Providers:</strong> When you sign in using Apple ID or Google, we receive basic profile information (email, name) as permitted by your privacy settings.</li>
-                <li><strong>Payment Information:</strong> In-app purchases are processed by Apple. We do not collect or store your payment card details. We only receive confirmation of purchases and subscription status.</li>
+                <li><strong>Apple/Google Authentication:</strong> Basic profile information (email, name) as permitted by your privacy settings</li>
+                <li><strong>Apple App Store:</strong> Purchase confirmations and subscription status (we do not receive your payment card details)</li>
+                <li><strong>RevenueCat:</strong> Subscription management and purchase verification</li>
             </ul>
 
             <h2>3. How We Use Your Information</h2>
@@ -227,181 +325,344 @@
                     <tr>
                         <th>Purpose</th>
                         <th>Data Used</th>
+                        <th>Legal Basis</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Provide AI generation services</td>
                         <td>Photos, prompts, style preferences</td>
+                        <td>Contract performance</td>
                     </tr>
                     <tr>
-                        <td>Account management</td>
-                        <td>Email, authentication data</td>
+                        <td>Account management & authentication</td>
+                        <td>Email, authentication tokens</td>
+                        <td>Contract performance</td>
                     </tr>
                     <tr>
-                        <td>Process transactions</td>
+                        <td>Process in-app purchases</td>
                         <td>Purchase confirmations, subscription status</td>
+                        <td>Contract performance</td>
+                    </tr>
+                    <tr>
+                        <td>Credit system management</td>
+                        <td>Usage history, credit balance</td>
+                        <td>Contract performance</td>
+                    </tr>
+                    <tr>
+                        <td>Community features</td>
+                        <td>Shared content, likes, user interactions</td>
+                        <td>Consent</td>
+                    </tr>
+                    <tr>
+                        <td>Push notifications</td>
+                        <td>Device tokens</td>
+                        <td>Consent</td>
                     </tr>
                     <tr>
                         <td>Improve our services</td>
-                        <td>Usage analytics, crash reports</td>
+                        <td>Anonymized usage analytics, crash reports</td>
+                        <td>Legitimate interest</td>
                     </tr>
                     <tr>
-                        <td>Send notifications</td>
-                        <td>Device tokens (with your permission)</td>
+                        <td>Prevent fraud & abuse</td>
+                        <td>Device identifiers, usage patterns</td>
+                        <td>Legitimate interest</td>
                     </tr>
                     <tr>
-                        <td>Provide customer support</td>
+                        <td>Customer support</td>
                         <td>Contact information, support requests</td>
-                    </tr>
-                    <tr>
-                        <td>Ensure security</td>
-                        <td>Device info, usage patterns</td>
+                        <td>Contract performance</td>
                     </tr>
                 </tbody>
             </table>
 
             <h2>4. Photo Processing and AI Services</h2>
 
+            <div class="info-box">
+                <p><strong>Important:</strong> We use fal.ai as our AI processing provider. Understanding how your photos are handled is crucial for your privacy.</p>
+            </div>
+
             <h3>4.1 How Your Photos Are Processed</h3>
             <p>When you use our AI generation features:</p>
             <ol>
-                <li>Your photos are securely uploaded to our cloud infrastructure.</li>
-                <li>Images are processed by third-party AI services (including fal.ai) to generate your requested content.</li>
-                <li>Generated results are delivered back to your device.</li>
-                <li>Original uploaded photos are automatically deleted from our servers after processing is complete, typically within 24 hours.</li>
+                <li><strong>Upload:</strong> Your photo is securely uploaded via encrypted HTTPS connection to our Firebase Cloud Functions</li>
+                <li><strong>Processing:</strong> The image is sent to fal.ai's secure servers for AI processing</li>
+                <li><strong>Generation:</strong> The AI model generates your requested content (photo transformation or video)</li>
+                <li><strong>Delivery:</strong> Generated results are delivered back to your device</li>
+                <li><strong>Automatic Deletion:</strong> Your original uploaded photo is automatically deleted from fal.ai servers within <strong>1 hour</strong> of processing completion</li>
             </ol>
 
-            <h3>4.2 Photo Storage</h3>
+            <h3>4.2 fal.ai Data Handling</h3>
+            <p>Our AI processing partner fal.ai:</p>
             <ul>
-                <li><strong>Temporary Processing:</strong> Photos uploaded for AI generation are stored temporarily and deleted after processing.</li>
-                <li><strong>Generated Content:</strong> AI-generated images are stored locally on your device. If you choose to save them to your photo library, they are stored according to your device settings.</li>
-                <li><strong>Community Sharing:</strong> If you voluntarily share content to the community gallery, those images are stored on our servers until you delete them or request removal.</li>
+                <li>Processes images only for the purpose of generating your requested content</li>
+                <li>Automatically deletes all uploaded images within 1 hour</li>
+                <li>Does NOT use your images to train AI models</li>
+                <li>Does NOT share your images with third parties</li>
+                <li>Maintains SOC 2 Type II compliance for security</li>
             </ul>
 
-            <div class="highlight-box">
-                <p><strong>Your Control:</strong> You can delete your generated content at any time from within the App. Community submissions can be removed by contacting our support team.</p>
-            </div>
+            <h3>4.3 Local Storage</h3>
+            <ul>
+                <li><strong>Generated Content:</strong> All AI-generated images and videos are stored locally on your device in the app's Documents directory</li>
+                <li><strong>Photo Library:</strong> You can optionally save generated content to your device's photo library</li>
+                <li><strong>Cache:</strong> Temporary cache files are stored locally and automatically cleaned</li>
+            </ul>
 
-            <h2>5. Data Sharing and Disclosure</h2>
+            <h3>4.4 Community Gallery Storage</h3>
+            <p>If you choose to share your creations to the Community:</p>
+            <ul>
+                <li>Images are uploaded to Cloudflare R2 storage</li>
+                <li>Metadata (category, prompt, model used) is stored in Firebase Firestore</li>
+                <li>Content remains stored until you delete it</li>
+                <li><strong>You can delete your community posts at any time</strong> directly from the App (Community > My Posts > Delete)</li>
+            </ul>
 
-            <h3>5.1 Third-Party Service Providers</h3>
+            <h2>5. Data Retention</h2>
+
+            <table class="retention-table">
+                <thead>
+                    <tr>
+                        <th>Data Type</th>
+                        <th>Retention Period</th>
+                        <th>Deletion Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Uploaded photos (AI processing)</td>
+                        <td><strong>1 hour</strong> after processing</td>
+                        <td>Automatic deletion by fal.ai</td>
+                    </tr>
+                    <tr>
+                        <td>Generated content</td>
+                        <td>Until you delete from device</td>
+                        <td>Delete from My Generations or device storage</td>
+                    </tr>
+                    <tr>
+                        <td>Community posts</td>
+                        <td>Until you delete</td>
+                        <td>Delete from Community > My Posts</td>
+                    </tr>
+                    <tr>
+                        <td>Account data</td>
+                        <td>While account is active</td>
+                        <td>Contact support for account deletion</td>
+                    </tr>
+                    <tr>
+                        <td>Usage analytics</td>
+                        <td>14 months (Firebase default)</td>
+                        <td>Anonymized, cannot be individually deleted</td>
+                    </tr>
+                    <tr>
+                        <td>Crash reports</td>
+                        <td>90 days</td>
+                        <td>Automatic expiration</td>
+                    </tr>
+                    <tr>
+                        <td>Purchase history</td>
+                        <td>As required by law (typically 7 years)</td>
+                        <td>Legal requirement</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>6. Data Sharing and Disclosure</h2>
+
+            <h3>6.1 Third-Party Service Providers</h3>
             <p>We share information with trusted third-party service providers who assist us in operating the App:</p>
-            <ul>
-                <li><strong>Firebase (Google):</strong> Authentication, analytics, cloud functions, and database services.</li>
-                <li><strong>fal.ai:</strong> AI image and video generation processing.</li>
-                <li><strong>Apple:</strong> In-app purchase processing, Sign in with Apple.</li>
-                <li><strong>RevenueCat:</strong> Subscription management and analytics.</li>
-            </ul>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Service Provider</th>
+                        <th>Purpose</th>
+                        <th>Data Shared</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Firebase (Google)</strong></td>
+                        <td>Authentication, database, analytics, cloud functions</td>
+                        <td>Account info, usage data, authentication tokens</td>
+                    </tr>
+                    <tr>
+                        <td><strong>fal.ai</strong></td>
+                        <td>AI image and video generation</td>
+                        <td>Uploaded photos (deleted within 1 hour), prompts</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cloudflare R2</strong></td>
+                        <td>Community content storage</td>
+                        <td>Voluntarily shared community posts</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RevenueCat</strong></td>
+                        <td>Subscription management</td>
+                        <td>Anonymous user ID, purchase status</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apple</strong></td>
+                        <td>In-app purchases, Sign in with Apple</td>
+                        <td>Purchase transactions, authentication</td>
+                    </tr>
+                </tbody>
+            </table>
 
             <p>These providers are contractually obligated to protect your information and use it only for the purposes we specify.</p>
 
-            <h3>5.2 We Do NOT</h3>
+            <h3>6.2 What We Do NOT Do</h3>
+            <div class="warning-box">
+                <ul style="margin-bottom: 0;">
+                    <li><strong>We do NOT sell</strong> your personal information to third parties</li>
+                    <li><strong>We do NOT share</strong> your photos with advertisers</li>
+                    <li><strong>We do NOT use</strong> your photos to train AI models</li>
+                    <li><strong>We do NOT provide</strong> your data to data brokers</li>
+                    <li><strong>We do NOT display</strong> targeted advertisements in the App</li>
+                </ul>
+            </div>
+
+            <h3>6.3 Legal Requirements</h3>
+            <p>We may disclose your information if required by law, court order, or government request, or if we believe disclosure is necessary to:</p>
             <ul>
-                <li>Sell your personal information to third parties</li>
-                <li>Share your photos with advertisers</li>
-                <li>Use your photos to train AI models without explicit consent</li>
-                <li>Provide your data to data brokers</li>
+                <li>Comply with legal obligations</li>
+                <li>Protect our rights or property</li>
+                <li>Prevent fraud or illegal activity</li>
+                <li>Protect the safety of users or the public</li>
             </ul>
 
-            <h3>5.3 Legal Requirements</h3>
-            <p>We may disclose your information if required by law, court order, or government request, or if we believe disclosure is necessary to protect our rights, your safety, or the safety of others.</p>
-
-            <h2>6. Data Security</h2>
+            <h2>7. Data Security</h2>
             <p>We implement robust security measures to protect your information:</p>
+
+            <h4>Encryption</h4>
             <ul>
-                <li><strong>Encryption:</strong> All data transmitted between your device and our servers is encrypted using TLS/SSL protocols.</li>
-                <li><strong>Secure Storage:</strong> Data at rest is encrypted using industry-standard encryption.</li>
-                <li><strong>Access Controls:</strong> Strict access controls limit who can access user data within our organization.</li>
-                <li><strong>Regular Audits:</strong> We regularly review and update our security practices.</li>
-                <li><strong>Firebase Security:</strong> We leverage Firebase's built-in security features and follow Google Cloud's security best practices.</li>
+                <li>All data transmitted between your device and our servers uses TLS 1.3 encryption</li>
+                <li>Data at rest is encrypted using AES-256 encryption</li>
+                <li>Authentication tokens are securely stored in iOS Keychain</li>
+            </ul>
+
+            <h4>Infrastructure Security</h4>
+            <ul>
+                <li>Firebase infrastructure with Google Cloud security</li>
+                <li>Cloudflare edge network protection</li>
+                <li>Regular security audits and monitoring</li>
+            </ul>
+
+            <h4>Access Controls</h4>
+            <ul>
+                <li>Strict role-based access controls</li>
+                <li>Two-factor authentication for administrative access</li>
+                <li>Regular access reviews</li>
             </ul>
 
             <p>While we strive to protect your information, no method of transmission over the Internet or electronic storage is 100% secure. We cannot guarantee absolute security.</p>
 
-            <h2>7. Data Retention</h2>
-            <ul>
-                <li><strong>Account Data:</strong> Retained while your account is active and for a reasonable period afterward for legal and business purposes.</li>
-                <li><strong>Processing Data:</strong> Photos uploaded for AI processing are deleted within 24 hours of processing completion.</li>
-                <li><strong>Generated Content:</strong> Stored locally on your device; you control retention through the App or your device settings.</li>
-                <li><strong>Analytics Data:</strong> Aggregated analytics data may be retained indefinitely in anonymized form.</li>
-                <li><strong>Community Content:</strong> Retained until you delete it or request removal.</li>
-            </ul>
-
             <h2>8. Your Rights and Choices</h2>
 
-            <h3>8.1 Access and Portability</h3>
-            <p>You can request a copy of your personal data by contacting us at <a href="mailto:support@santai.app">support@santai.app</a>.</p>
-
-            <h3>8.2 Deletion</h3>
-            <p>You can request deletion of your account and associated data. To delete your account:</p>
+            <h3>8.1 Access Your Data</h3>
+            <p>You can view your:</p>
             <ul>
-                <li>Go to Profile > Settings > Delete Account in the App, or</li>
-                <li>Contact us at <a href="mailto:support@santai.app">support@santai.app</a></li>
+                <li>Generated content in "My Generations" section</li>
+                <li>Community posts in "Community > My Posts"</li>
+                <li>Account information in Profile settings</li>
             </ul>
+            <p>For a complete data export, contact us at <a href="mailto:support@santai.app">support@santai.app</a>.</p>
+
+            <h3>8.2 Delete Your Data</h3>
+            <p><strong>Within the App:</strong></p>
+            <ul>
+                <li><strong>Generated Content:</strong> Delete from My Generations screen</li>
+                <li><strong>Community Posts:</strong> Go to Community > filter by "My Posts" > tap trash icon on any post</li>
+                <li><strong>Local Cache:</strong> Clear from device Settings > Santai > Clear Cache</li>
+            </ul>
+            <p><strong>Account Deletion:</strong> Contact <a href="mailto:support@santai.app">support@santai.app</a> to request complete account deletion. We will delete your account and associated data within 30 days.</p>
 
             <h3>8.3 Opt-Out Options</h3>
             <ul>
-                <li><strong>Push Notifications:</strong> Manage through your device settings or App settings.</li>
-                <li><strong>Analytics:</strong> You can opt out of analytics collection in App settings.</li>
-                <li><strong>Marketing:</strong> We do not send marketing emails without your explicit consent.</li>
+                <li><strong>Push Notifications:</strong> Manage in iOS Settings > Santai > Notifications</li>
+                <li><strong>Analytics:</strong> We respect iOS App Tracking Transparency settings</li>
+                <li><strong>Community Sharing:</strong> Completely optional - you control what you share</li>
+                <li><strong>Data Processing Consent:</strong> You can revoke consent, but this will prevent AI generation features from working</li>
             </ul>
 
-            <h3>8.4 California Residents (CCPA)</h3>
-            <p>California residents have additional rights under the California Consumer Privacy Act:</p>
+            <h3>8.4 California Residents (CCPA/CPRA)</h3>
+            <p>California residents have additional rights:</p>
             <ul>
-                <li>Right to know what personal information we collect</li>
-                <li>Right to delete personal information</li>
-                <li>Right to opt-out of sale of personal information (we do not sell personal information)</li>
-                <li>Right to non-discrimination for exercising privacy rights</li>
+                <li><strong>Right to Know:</strong> Request what personal information we collect, use, and disclose</li>
+                <li><strong>Right to Delete:</strong> Request deletion of your personal information</li>
+                <li><strong>Right to Correct:</strong> Request correction of inaccurate information</li>
+                <li><strong>Right to Opt-Out:</strong> We do not sell personal information, so this right does not apply</li>
+                <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising your rights</li>
             </ul>
+            <p>To exercise these rights, contact <a href="mailto:support@santai.app">support@santai.app</a>.</p>
 
             <h3>8.5 European Users (GDPR)</h3>
             <p>If you are in the European Economic Area, you have rights including:</p>
             <ul>
-                <li>Right to access your personal data</li>
-                <li>Right to rectification of inaccurate data</li>
-                <li>Right to erasure ("right to be forgotten")</li>
-                <li>Right to restrict processing</li>
-                <li>Right to data portability</li>
-                <li>Right to object to processing</li>
+                <li><strong>Right of Access:</strong> Obtain a copy of your personal data</li>
+                <li><strong>Right to Rectification:</strong> Correct inaccurate data</li>
+                <li><strong>Right to Erasure:</strong> Request deletion ("right to be forgotten")</li>
+                <li><strong>Right to Restrict Processing:</strong> Limit how we use your data</li>
+                <li><strong>Right to Data Portability:</strong> Receive your data in a structured format</li>
+                <li><strong>Right to Object:</strong> Object to processing based on legitimate interests</li>
+                <li><strong>Right to Withdraw Consent:</strong> Withdraw consent at any time</li>
             </ul>
-            <p>Our legal basis for processing includes: consent, contract performance, and legitimate interests.</p>
+            <p><strong>Legal Basis for Processing:</strong> Contract performance (providing services), consent (community features, notifications), legitimate interests (security, analytics).</p>
 
             <h2>9. Children's Privacy</h2>
-            <p>The App is not intended for children under 13 years of age (or 16 in some jurisdictions). We do not knowingly collect personal information from children. If we discover that we have collected information from a child under the applicable age, we will delete that information immediately.</p>
-
-            <p>If you are a parent or guardian and believe your child has provided us with personal information, please contact us at <a href="mailto:support@santai.app">support@santai.app</a>.</p>
+            <p>The App is rated 4+ on the App Store and is suitable for all ages. However:</p>
+            <ul>
+                <li>We do not knowingly collect personal information from children under 13 (or 16 in some jurisdictions)</li>
+                <li>Account creation and purchases require age verification through Apple ID</li>
+                <li>If we discover we have collected information from a child without appropriate consent, we will delete it immediately</li>
+            </ul>
+            <p>If you are a parent or guardian and believe your child has provided personal information, contact us at <a href="mailto:support@santai.app">support@santai.app</a>.</p>
 
             <h2>10. International Data Transfers</h2>
-            <p>Your information may be transferred to and processed in countries other than your country of residence. These countries may have different data protection laws. When we transfer data internationally, we implement appropriate safeguards including:</p>
+            <p>Your information may be transferred to and processed in:</p>
             <ul>
-                <li>Standard Contractual Clauses approved by relevant authorities</li>
+                <li><strong>United States:</strong> Firebase, fal.ai servers</li>
+                <li><strong>Global Edge Locations:</strong> Cloudflare CDN for content delivery</li>
+            </ul>
+            <p>When we transfer data internationally, we implement appropriate safeguards:</p>
+            <ul>
+                <li>Standard Contractual Clauses (SCCs) approved by the European Commission</li>
+                <li>Data Processing Agreements with all service providers</li>
                 <li>Ensuring recipients maintain adequate security measures</li>
-                <li>Processing data with reputable service providers with strong privacy practices</li>
             </ul>
 
-            <h2>11. Third-Party Links</h2>
-            <p>The App may contain links to third-party websites or services. We are not responsible for the privacy practices of these third parties. We encourage you to read their privacy policies before providing any personal information.</p>
-
-            <h2>12. Changes to This Privacy Policy</h2>
-            <p>We may update this Privacy Policy from time to time. We will notify you of any material changes by:</p>
+            <h2>11. Consent Management</h2>
+            <p>Before using AI generation features, you must provide consent for data processing. This consent popup explains:</p>
             <ul>
-                <li>Posting the new Privacy Policy in the App</li>
-                <li>Updating the "Last Updated" date at the top of this page</li>
-                <li>Sending a notification through the App for significant changes</li>
+                <li>How your photos are uploaded and processed</li>
+                <li>That images are automatically deleted within 1 hour</li>
+                <li>That generated content stays on your device</li>
+                <li>Our commitment to never selling your data</li>
             </ul>
-            <p>Your continued use of the App after changes become effective constitutes acceptance of the revised Privacy Policy.</p>
+            <p>You can view and manage your consent status in Profile > Settings. Revoking consent will prevent AI generation features from working.</p>
 
-            <h2>13. Contact Us</h2>
-            <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
+            <h2>12. Third-Party Links</h2>
+            <p>The App may contain links to third-party websites or services (such as Apple's Terms of Service). We are not responsible for the privacy practices of these third parties. We encourage you to read their privacy policies.</p>
+
+            <h2>13. Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify you of material changes by:</p>
+            <ul>
+                <li>Posting the updated Privacy Policy in the App</li>
+                <li>Updating the "Last Updated" date at the top</li>
+                <li>Showing an in-app notification for significant changes</li>
+            </ul>
+            <p>Continued use of the App after changes become effective constitutes acceptance of the revised Privacy Policy.</p>
+
+            <h2>14. Contact Us</h2>
+            <p>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices:</p>
             <ul>
                 <li><strong>Email:</strong> <a href="mailto:support@santai.app">support@santai.app</a></li>
             </ul>
-            <p>We will respond to your inquiry within 30 days.</p>
+            <p>We will respond to your inquiry within 30 days (or sooner as required by applicable law).</p>
 
             <div class="highlight-box">
-                <p><strong>Thank you for trusting Santai.</strong> We are committed to protecting your privacy and providing you with a secure, enjoyable experience.</p>
+                <p><strong>Thank you for trusting Santai.</strong> Your privacy is important to us, and we are committed to being transparent about how we handle your data while providing you with amazing AI-powered creative tools.</p>
             </div>
         </div>
 
