@@ -10,7 +10,7 @@ Official support website for [VizioAI](https://apps.apple.com/app/vizioai) - AI 
 
 ## Hosting
 
-This website is hosted on GitHub Pages at: https://alperenciftlikci.github.io/vizioai-support/
+This website is hosted on GitHub Pages at: https://alperenciftlikci.github.io/Santa-AI/
 
 ## Contact
 
