@@ -1,6 +1,6 @@
-# Santai Support Website
+# VizioAI Support Website
 
-Official support website for [Santai](https://apps.apple.com/app/santai) - AI Photo & Video Generator app.
+Official support website for [VizioAI](https://apps.apple.com/app/vizioai) - AI Photo & Video Generator app.
 
 ## Pages
 
@@ -10,8 +10,8 @@ Official support website for [Santai](https://apps.apple.com/app/santai) - AI Ph
 
 ## Hosting
 
-This website is hosted on GitHub Pages at: https://alperenciftlikci.github.io/Santa-AI/
+This website is hosted on GitHub Pages at: https://alperenciftlikci.github.io/vizioai-support/
 
 ## Contact
 
-For support inquiries: support@santai.app
+For support inquiries: santai.help.app@gmail.com
